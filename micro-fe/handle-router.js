@@ -9,11 +9,11 @@ export const handleRouter = async () => {
   const apps = getApps()
 
   const prevApp = apps.find(item => {
-    return getPrevRoute().startsWith(item.activeRule)
+    return getPrevRoute === item.activeRule
   })
 
   const app = apps.find(item => {
-    return getNextRoute().startsWith(item.activeRule)
+    return getNextRoute() === item.activeRule
   })
 
   if (prevApp) {
@@ -27,25 +27,24 @@ export const handleRouter = async () => {
   // 3. 加载子应用
   const {
     template,
-    getExternalScripts,
     execScripts
   } = await importHTML(app.entry)
 
   const container = document.querySelector(app.container)
   container.appendChild(template)
   window.__POWERED_BY_QIANKUN__ = true
+  window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ = app.entry
 
   // 浏览器出于安全考虑，插入 HTML 的 script 标签是不会执行的，所以要手动执行
   const appExports = await execScripts()
-  debugger
+
   app.boostrap = appExports.boostrap
   app.mount = appExports.mount
   app.unmount = appExports.unmount
 
   await boostrap(app)
-  await mount(app)
-
   // 4. 渲染子应用
+  await mount(app)
 }
 
 async function boostrap(app) {

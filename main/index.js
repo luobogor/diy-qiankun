@@ -1,5 +1,6 @@
 import 'zone.js'; // for angular subapp
 import { registerMicroApps, start } from '../micro-fe';
+// import { registerMicroApps, start } from 'qiankun';
 import './index.less';
 /**
  * 主应用 **可以使用任意技术栈**
@@ -11,7 +12,7 @@ import render from './render/ReactRender';
 /**
  * Step1 初始化应用（可选）
  */
-render({ loading: true });
+render({});
 
 // const loader = (loading) => render({ loading });
 
@@ -22,14 +23,14 @@ render({ loading: true });
 registerMicroApps(
   [ {
       name: 'vue',
-      entry: '//localhost:7101',
+      entry: '//localhost:7101/',
       container: '#subapp-viewport',
       // loader,
       activeRule: '/vue',
     },
     {
       name: 'vue3',
-      entry: '//localhost:7105',
+      entry: '//localhost:7105/',
       container: '#subapp-viewport',
       // loader,
       activeRule: '/vue3',

@@ -3,6 +3,7 @@ import { fetchResource } from './fetch-resource';
 export const importHTML = async (url) => {
   const template = document.createElement('div')
   template.innerHTML = await fetchResource(url)
+  // TODO 删除 DOM，不然加载 html 的时候会报 js 地址 404
   const scripts = template.querySelectorAll('script')
 
   // 获取所有 script 标签代码

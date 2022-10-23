@@ -25,6 +25,7 @@
     "cross-env": "^7.0.2"
   },
   "dependencies": {
+    "qiankun": "^2.8.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "vue": "^2.6.11",

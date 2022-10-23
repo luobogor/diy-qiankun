@@ -59,6 +59,7 @@ export async function mount(props) {
 }
 
 export async function unmount() {
+  debugger
   instance.$destroy();
   instance.$el.innerHTML = '';
   instance = null;

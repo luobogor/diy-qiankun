@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npm start",
     "start": "webpack-dev-server",
     "start:multiple": "cross-env MODE=multiple webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -12,6 +12,7 @@ export const getNextRoute = () => nextRoute
 //   - pushState、replaceState 需要通过重写进行劫持
 export const rewriteRouter = () => {
   window.addEventListener('popstate', () => {
+    debugger
     prevRoute = nextRoute
     nextRoute = window.location.pathname
     handleRouter()
@@ -19,6 +20,7 @@ export const rewriteRouter = () => {
 
   const rawPushState = window.history.pushState
   window.history.pushState = (...args) => {
+    debugger
     prevRoute = window.location.pathname
     rawPushState.apply(window.history, args)
     nextRoute = window.location.pathname
@@ -28,6 +30,7 @@ export const rewriteRouter = () => {
 
   const rawReplaceState = window.history.replaceState
   window.history.replaceState = (...args) => {
+    debugger
     prevRoute = window.location.pathname
     rawReplaceState.apply(window.history, args)
     nextRoute = window.location.pathname

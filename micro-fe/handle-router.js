@@ -37,6 +37,7 @@ export const handleRouter = async () => {
 
   // 浏览器出于安全考虑，插入 HTML 的 script 标签是不会执行的，所以要手动执行
   const appExports = await execScripts()
+  debugger
   app.boostrap = appExports.boostrap
   app.mount = appExports.mount
   app.unmount = appExports.unmount

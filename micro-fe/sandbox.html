@@ -32,7 +32,6 @@
 
 
       Object.keys(this.modifyPropsMap).forEach((prop) => {
-        debugger
         window[prop] = this.modifyPropsMap[prop]
       })
     }
@@ -40,7 +39,6 @@
     inactive() {
       iterObject(window, (prop) => {
         if (this.windowSnapshot[prop] !== window[prop]) {
-          debugger
           this.modifyPropsMap[prop] = window[prop]
 
           window[prop] = this.windowSnapshot[prop]

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SnapshotSandbox Demo</title>
+</head>
+
+<body>
+</body>
+
+<script>
+  const iterObject = (_window, callback) => {
+    for (const prop in _window) {
+      if (window.hasOwnProperty(prop)) {
+        callback(prop)
+      }
+    }
+  }
+
+  class SnapshotSandbox {
+    constructor(props) {
+      this.proxy = window
+      this.modifyPropsMap = {}
+    }
+
+    active() {
+      this.windowSnapshot = {}
+
+      iterObject(window, (prop) => {
+        this.windowSnapshot[prop] = window[prop]
+      })
+
+
+      Object.keys(this.modifyPropsMap).forEach((prop) => {
+        debugger
+        window[prop] = this.modifyPropsMap[prop]
+      })
+    }
+
+    inactive() {
+      iterObject(window, (prop) => {
+        if (this.windowSnapshot[prop] !== window[prop]) {
+          debugger
+          this.modifyPropsMap[prop] = window[prop]
+
+          window[prop] = this.windowSnapshot[prop]
+        }
+      })
+    }
+  }
+
+  const sandbox = new SnapshotSandbox()
+
+
+  ;((_window) => {
+    // 激活沙箱
+    sandbox.active()
+    window.sex = 'male'
+    window.age = 22
+    console.log(window.sex, window.age)
+
+    // 退出沙箱
+    sandbox.inactive()
+    console.log(window.sex, window.age)
+
+    // 激活沙箱
+    sandbox.active()
+    console.log(window.sex, window.age)
+  })(sandbox.proxy)
+</script>
+</html>
